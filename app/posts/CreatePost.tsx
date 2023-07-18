@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
+  const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await fetch("http://127.0.0.1:8090/api/collections/posts/records", {
@@ -14,6 +16,7 @@ const CreatePost = () => {
       }),
     });
     setTitle("");
+    router.refresh();
   };
   return (
     <form onSubmit={handleSubmit}>
